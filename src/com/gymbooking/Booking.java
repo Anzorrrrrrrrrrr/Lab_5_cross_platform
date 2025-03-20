@@ -1,6 +1,5 @@
 package com.gymbooking;
 
-
 import java.time.LocalDateTime;
 
 public class Booking {
@@ -11,6 +10,9 @@ public class Booking {
     private LocalDateTime bookingTime;
     private double price;
 
+    // Додаємо конструктор без параметрів для Jackson
+    public Booking() {
+    }
 
     public Booking(int bookingId, String customerName, String trainerName, String activity, LocalDateTime bookingTime, double price) {
         this.bookingId = bookingId;
@@ -20,7 +22,6 @@ public class Booking {
         this.bookingTime = bookingTime;
         this.price = price;
     }
-
 
     public int getBookingId() { return bookingId; }
     public void setBookingId(int bookingId) { this.bookingId = bookingId; }
