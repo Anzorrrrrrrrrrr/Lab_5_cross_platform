@@ -25,8 +25,9 @@ public class Main {
         JMenuItem readItem = new JMenuItem("Read Bookings");
         JMenuItem updateItem = new JMenuItem("Update Booking");
         JMenuItem deleteItem = new JMenuItem("Delete Booking");
-        JMenuItem searchItem = new JMenuItem("Search Booking");
-        JMenu sortMenu = new JMenu("Sort Bookings");  // Змінено на підменю
+        JMenuItem searchByCustomerItem = new JMenuItem("Search by Customer Name");
+        JMenuItem searchByTrainerItem = new JMenuItem("Search by Trainer Name");
+        JMenu sortMenu = new JMenu("Sort Bookings");
         JMenuItem sortByTimeItem = new JMenuItem("Sort by Time");
         JMenuItem sortByPriceItem = new JMenuItem("Sort by Price");
 
@@ -91,23 +92,51 @@ public class Main {
             }
         });
 
-        searchItem.addActionListener(e -> {
+        searchByCustomerItem.addActionListener(e -> {
             if (bookings.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "No bookings to search.");
                 return;
             }
+
             String customerName = JOptionPane.showInputDialog(frame, "Enter customer name to search:");
-            List<Booking> foundBookings = bookings.stream()
-                    .filter(b -> b.getCustomerName().equalsIgnoreCase(customerName))
-                    .toList();
-            if (foundBookings.isEmpty()) {
-                JOptionPane.showMessageDialog(frame, "No bookings found for " + customerName);
-            } else {
-                StringBuilder sb = new StringBuilder("Found bookings:\n");
-                for (Booking b : foundBookings) {
-                    sb.append(b).append("\n");
+            if (customerName != null && !customerName.isEmpty()) {
+                List<Booking> foundBookings = bookings.stream()
+                        .filter(b -> b.getCustomerName().equalsIgnoreCase(customerName))
+                        .toList();
+
+                if (foundBookings.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "No bookings found for customer: " + customerName);
+                } else {
+                    StringBuilder sb = new StringBuilder("Found bookings:\n");
+                    for (Booking b : foundBookings) {
+                        sb.append(b).append("\n");
+                    }
+                    JOptionPane.showMessageDialog(frame, sb.toString());
                 }
-                JOptionPane.showMessageDialog(frame, "Found bookings:\n" + sb.toString());
+            }
+        });
+
+        searchByTrainerItem.addActionListener(e -> {
+            if (bookings.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "No bookings to search.");
+                return;
+            }
+
+            String trainerName = JOptionPane.showInputDialog(frame, "Enter trainer name to search:");
+            if (trainerName != null && !trainerName.isEmpty()) {
+                List<Booking> foundBookings = bookings.stream()
+                        .filter(b -> b.getTrainerName().equalsIgnoreCase(trainerName))
+                        .toList();
+
+                if (foundBookings.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "No bookings found for trainer: " + trainerName);
+                } else {
+                    StringBuilder sb = new StringBuilder("Found bookings:\n");
+                    for (Booking b : foundBookings) {
+                        sb.append(b).append("\n");
+                    }
+                    JOptionPane.showMessageDialog(frame, sb.toString());
+                }
             }
         });
 
@@ -136,7 +165,8 @@ public class Main {
         operationsMenu.add(readItem);
         operationsMenu.add(updateItem);
         operationsMenu.add(deleteItem);
-        operationsMenu.add(searchItem);
+        operationsMenu.add(searchByCustomerItem);
+        operationsMenu.add(searchByTrainerItem);
         operationsMenu.add(sortMenu);
         sortMenu.add(sortByTimeItem);
         sortMenu.add(sortByPriceItem);
