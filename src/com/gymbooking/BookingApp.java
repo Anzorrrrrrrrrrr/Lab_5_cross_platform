@@ -20,9 +20,14 @@ public class BookingApp {
                 case 3 -> viewBooking();
                 case 4 -> updateBooking();
                 case 5 -> deleteBooking();
+                case 6 -> searchByCustomerName();
+                case 7 -> searchByTrainingType();
+                case 8 -> sortByDateTime();
+                case 9 -> sortByDuration();
                 case 0 -> System.out.println("До побачення!");
                 default -> System.out.println("Невірний вибір!");
             }
+
         } while (choice != 0);
     }
 
@@ -33,8 +38,13 @@ public class BookingApp {
         System.out.println("3. Переглянути бронювання за ID");
         System.out.println("4. Оновити бронювання");
         System.out.println("5. Видалити бронювання");
+        System.out.println("6. Пошук за ім'ям клієнта");
+        System.out.println("7. Пошук за типом тренування");
+        System.out.println("8. Сортувати за датою тренування");
+        System.out.println("9. Сортувати за тривалістю тренування");
         System.out.println("0. Вийти");
     }
+
 
     private static void createBooking() {
         int id = readInt("ID: ");
@@ -86,6 +96,36 @@ public class BookingApp {
         int id = readInt("ID для видалення: ");
         service.deleteBooking(id);
         System.out.println("Бронювання видалено.");
+    }
+
+    private static void searchByCustomerName() {
+        String name = readString("Введіть ім'я або його частину: ");
+        List<Booking> results = service.searchByCustomerName(name);
+        printBookings(results);
+    }
+
+    private static void searchByTrainingType() {
+        String type = readString("Введіть тип тренування: ");
+        List<Booking> results = service.searchByTrainingType(type);
+        printBookings(results);
+    }
+
+    private static void sortByDateTime() {
+        List<Booking> results = service.sortByDateTime();
+        printBookings(results);
+    }
+
+    private static void sortByDuration() {
+        List<Booking> results = service.sortByDuration();
+        printBookings(results);
+    }
+
+    private static void printBookings(List<Booking> bookings) {
+        if (bookings.isEmpty()) {
+            System.out.println("Нічого не знайдено.");
+        } else {
+            bookings.forEach(System.out::println);
+        }
     }
 
     // ----------------- Допоміжні методи -----------------

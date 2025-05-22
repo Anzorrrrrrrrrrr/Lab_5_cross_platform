@@ -41,6 +41,38 @@ public class BookingServiceImpl {
         }
     }
 
+    public List<Booking> searchByCustomerName(String name) {
+        List<Booking> result = new ArrayList<>();
+        for (Booking b : bookings) {
+            if (b.getCustomerName().toLowerCase().contains(name.toLowerCase())) {
+                result.add(b);
+            }
+        }
+        return result;
+    }
+
+    public List<Booking> searchByTrainingType(String type) {
+        List<Booking> result = new ArrayList<>();
+        for (Booking b : bookings) {
+            if (b.getTrainingType().equalsIgnoreCase(type)) {
+                result.add(b);
+            }
+        }
+        return result;
+    }
+
+    public List<Booking> sortByDateTime() {
+        List<Booking> sorted = new ArrayList<>(bookings);
+        sorted.sort(Comparator.comparing(Booking::getDateTime));
+        return sorted;
+    }
+
+    public List<Booking> sortByDuration() {
+        List<Booking> sorted = new ArrayList<>(bookings);
+        sorted.sort(Comparator.comparingInt(Booking::getDurationMinutes));
+        return sorted;
+    }
+
     public Booking getById(int id) {
         for (Booking b : bookings) {
             if (b.getId() == id) return b;
