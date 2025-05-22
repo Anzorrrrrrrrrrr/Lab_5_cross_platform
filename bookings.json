@@ -1,1 +1,1 @@
-[{"bookingId":1,"customerName":"саша","trainerName":"віталік","activity":"біг","bookingTime":"2025-03-20T17:55:52.538853","price":1000.0},{"bookingId":2,"customerName":"юра","trainerName":"женя","activity":"біг","bookingTime":"2025-03-20T17:56:02.6593872","price":3000.0}]
+[{"id":1,"customerName":"Sasha","trainingType":"","dateTime":"2025-05-22T10:43:00","durationMinutes":60},{"id":3,"customerName":"Оля","trainingType":"Біг","dateTime":"2025-05-23T15:00:00","durationMinutes":30}]

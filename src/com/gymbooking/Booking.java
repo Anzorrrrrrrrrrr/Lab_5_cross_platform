@@ -3,48 +3,68 @@ package com.gymbooking;
 import java.time.LocalDateTime;
 
 public class Booking {
-    private int bookingId;
+    private int id;
     private String customerName;
-    private String trainerName;
-    private String activity;
-    private LocalDateTime bookingTime;
-    private double price;
+    private String trainingType;
+    private LocalDateTime dateTime;
+    private int durationMinutes;
 
-    // Додаємо конструктор без параметрів для Jackson
-    public Booking() {
-    }
-
-    public Booking(int bookingId, String customerName, String trainerName, String activity, LocalDateTime bookingTime, double price) {
-        this.bookingId = bookingId;
+    // Конструктор
+    public Booking(int id, String customerName, String trainingType, LocalDateTime dateTime, int durationMinutes) {
+        this.id = id;
         this.customerName = customerName;
-        this.trainerName = trainerName;
-        this.activity = activity;
-        this.bookingTime = bookingTime;
-        this.price = price;
+        this.trainingType = trainingType;
+        this.dateTime = dateTime;
+        this.durationMinutes = durationMinutes;
     }
 
-    public int getBookingId() { return bookingId; }
-    public void setBookingId(int bookingId) { this.bookingId = bookingId; }
-    public String getCustomerName() { return customerName; }
-    public void setCustomerName(String customerName) { this.customerName = customerName; }
-    public String getTrainerName() { return trainerName; }
-    public void setTrainerName(String trainerName) { this.trainerName = trainerName; }
-    public String getActivity() { return activity; }
-    public void setActivity(String activity) { this.activity = activity; }
-    public LocalDateTime getBookingTime() { return bookingTime; }
-    public void setBookingTime(LocalDateTime bookingTime) { this.bookingTime = bookingTime; }
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    // Порожній конструктор (важливо для десеріалізації)
+    public Booking() {}
+
+    // Геттери і сеттери
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getTrainingType() {
+        return trainingType;
+    }
+    public void setTrainingType(String trainingType) {
+        this.trainingType = trainingType;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public int getDurationMinutes() {
+        return durationMinutes;
+    }
+    public void setDurationMinutes(int durationMinutes) {
+        this.durationMinutes = durationMinutes;
+    }
 
     @Override
     public String toString() {
         return "Booking{" +
-                "bookingId=" + bookingId +
+                "id=" + id +
                 ", customerName='" + customerName + '\'' +
-                ", trainerName='" + trainerName + '\'' +
-                ", activity='" + activity + '\'' +
-                ", bookingTime=" + bookingTime +
-                ", price=" + price +
+                ", trainingType='" + trainingType + '\'' +
+                ", dateTime=" + dateTime +
+                ", durationMinutes=" + durationMinutes +
                 '}';
     }
 }
